@@ -108,6 +108,18 @@ node * fullBST(int n, int * count){
     return root;
 }
 
+node * AVLmin(int h, int * count){
+    node * root = new node;
+    if (h<=0) {
+        return NULL;
+    }
+    root->left = AVLmin(h-1, count);
+    root->data = (*count)++;
+    root->right = AVLmin(h-2, count);
+    root->ht = h;
+    return root;
+}
+
 void inorder(node * root){
     if (!root) {
         return;
@@ -135,6 +147,21 @@ void postorder(node * root){
     cout << root->data << "\t";
 }
 
+int rangeCount(node * root, int a, int b){
+    if (!root) {
+        return 0;
+    }
+    int count = 0;
+    if (root->data > a && root->data < b) {
+        count = rangeCount(root->left, a, b) + 1 + rangeCount(root->right, a, b);
+    }else if (root->data < a){
+        count = rangeCount(root->right, a, b);
+    }else if (root->data > b){
+        count = rangeCount(root->left, a, b);
+    }
+    return count;
+}
+
 int main()
 {
     node * root = new node;
@@ -147,6 +174,8 @@ int main()
         cout << " 4. Preorder traverse" << endl;
         cout << " 5. Postorder traverse" << endl;
         cout << " 6. Build full tree" << endl;
+        cout << " 7. Build min AVL tree" << endl;
+        cout << " 8. Range count" << endl;
         
         int ch;
         cin >> ch;
@@ -186,6 +215,7 @@ int main()
                 }else{
                     cout << "Tree empty\n";
                 }
+                
             }
                 break;
                 
@@ -208,7 +238,24 @@ int main()
             }
                 break;
                 
+            case 7:
+            {
+                int ht,count=1;
+                cout << "Enter height\n";
+                cin >> ht;
+                root = AVLmin(ht, &count);
+            }
                 break;
+                
+            case 8:
+            {
+                int a,b;
+                cout << "Enter values\n";
+                cin >> a >> b;
+                cout << rangeCount(root, a, b) << endl;
+            }
+                break;
+                
             default:
                 break;
         }
