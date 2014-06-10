@@ -77,18 +77,18 @@ node * insert(node * root, int data){
         root->left = insert(root->left, data);
         if (AVLht(root->left)-AVLht(root->right) == 2) {
             if (data > root->left->data) {
-                doubleRotateLeft(root);
+                root = doubleRotateLeft(root);
             }else if (data < root->left->data){
-                rotateRight(root);
+                root = rotateRight(root);
             }
         }
     }else if (root->data < data) {
         root->right = insert(root->right, data);
         if (AVLht(root->right)-AVLht(root->left) == 2) {
             if (data < root->right->data) {
-                doubleRotateRight(root);
+                root = doubleRotateRight(root);
             }else if (data > root->right->data){
-                rotateLeft(root);
+                root = rotateLeft(root);
             }
         }
     }
