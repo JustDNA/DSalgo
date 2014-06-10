@@ -96,6 +96,18 @@ node * insert(node * root, int data){
     return root;
 }
 
+node * fullBST(int n, int * count){
+    node * root = new node;
+    if (!n) {
+        return NULL;
+    }
+    root->left = fullBST(n-1, count);
+    root->data = (*count)++;
+    root->right = fullBST(n-1, count);
+    root->ht = max(AVLht(root->left),AVLht(root->right)) + 1;
+    return root;
+}
+
 void inorder(node * root){
     if (!root) {
         return;
@@ -134,6 +146,8 @@ int main()
         cout << " 3. Inorder traverse" << endl;
         cout << " 4. Preorder traverse" << endl;
         cout << " 5. Postorder traverse" << endl;
+        cout << " 6. Build full tree" << endl;
+        
         int ch;
         cin >> ch;
         switch (ch) {
@@ -184,6 +198,16 @@ int main()
                     cout << "Tree empty\n";
                 }
             }
+                
+            case 6:
+            {
+                int ht,count=1;
+                cout << "Enter height\n";
+                cin >> ht;
+                root = fullBST(ht, &count);
+            }
+                break;
+                
                 break;
             default:
                 break;
