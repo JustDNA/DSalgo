@@ -15,17 +15,17 @@ void shuffle2(int arr[],int size,int n){
         cout << endl;
         return;
     }
-
-        arr[size-1] = 0;
-        shuffle2(arr,size-1,n);
-        arr[size-1] =1;
-        shuffle2(arr,size-1,n);
+    
+    arr[size-1] = 0;
+    shuffle2(arr,size-1,n);
+    arr[size-1] =1;
+    shuffle2(arr,size-1,n);
 }
 
 bool isSetSum(int set[], int n, int sum){
     if(sum == 0)
     {
-     return true;
+        return true;
     }
     if(n==0 && sum!=0)
     {
@@ -52,7 +52,7 @@ void showSubSet(int set[], int n, int m, int bin[]){
         }
         return;
     }
-   
+    
     bin[n-1] = 0;
     showSubSet(set, n-1, m, bin);
     bin[n-1] = 1;
@@ -173,10 +173,10 @@ bool findWay(int **mat, int **path,int i, int j, int x, int y, int len){
             path[i][j] = findWay(mat, path, i, j+1, x, y, len+1);
         }
         if(!path[i][j]){
-   //         path[i][j] = findWay(mat, path, i-1, j, x, y, len+1);
+            //         path[i][j] = findWay(mat, path, i-1, j, x, y, len+1);
         }
         if(!path[i][j]){
-   //         path[i][j] = findWay(mat, path, i, j-1, x, y, len+1);
+            //         path[i][j] = findWay(mat, path, i, j-1, x, y, len+1);
         }
         return(path[i][j]);
     }
@@ -210,20 +210,20 @@ bool allPath(int **mat, int **path,int i, int j, int x, int y, int len, int cost
     }
     if(mat[i][j])
     {
-    bool found = false;
-    
+        bool found = false;
+        
         path[len][0] = i+1;
         path[len][1] = j;
         
-       
-    found = allPath(mat, path, i+1, j, x, y, len+1, cost+mat[i][j], s);
-    
-    
+        
+        found = allPath(mat, path, i+1, j, x, y, len+1, cost+mat[i][j], s);
+        
+        
         path[len][0] = i;
         path[len][1] = j+1;
         
-    found = allPath(mat, path, i, j+1, x, y, len+1, cost+mat[i][j], s);
-    
+        found = allPath(mat, path, i, j+1, x, y, len+1, cost+mat[i][j], s);
+        
         return found;
     }
     else{
@@ -291,29 +291,29 @@ void basinSizeDFS(int **region, int *size, int x, int y, int i, int j, int val, 
     if(region[i][j]!=val || i>x || j>y || i<0 || j<0){
         return;
     }
-     visited[i][j]=1;
-     
+    visited[i][j]=1;
+    
     (*size)++;
     if(i+1<x){
-    if (!visited[i+1][j]) {
-        basinSizeDFS(region, size, x, y, i+1, j, val, visited);
+        if (!visited[i+1][j]) {
+            basinSizeDFS(region, size, x, y, i+1, j, val, visited);
+        }
     }
-}
     if(j+1<y){
         if (!visited[i][j+1]) {
-        basinSizeDFS(region, size, x, y, i, j+1, val, visited);
+            basinSizeDFS(region, size, x, y, i, j+1, val, visited);
+        }
     }
-}
     if(i-1>=0){
         if (!visited[i-1][j]) {
-        basinSizeDFS(region, size, x, y, i-1, j, val, visited);
+            basinSizeDFS(region, size, x, y, i-1, j, val, visited);
+        }
     }
-}
     if(j-1>=0){
         if (!visited[i][j-1]) {
-        basinSizeDFS(region, size, x, y, i, j-1, val, visited);
+            basinSizeDFS(region, size, x, y, i, j-1, val, visited);
+        }
     }
-}
 }
 
 class point{
@@ -378,7 +378,7 @@ int basinSizeBFS(int **region, int **visited, int x, int y, int i, int j){
                 q.push_back(p);
             }
         }
-}
+    }
     
     return size;
 }
@@ -456,7 +456,7 @@ void solveKtour(){
     if (result) {
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
-               cout << board[i][j] << "\t";
+                cout << board[i][j] << "\t";
             }
             cout << endl;
         }
@@ -507,16 +507,16 @@ bool NQ(int **board, int col, int n){
     }
     bool result;
     for (int k=0; k<n; k++) {       //trying each row for a given column
-            if (Qsafe(board, k, col, n)) {
-                board[k][col]=1;
-                result = NQ(board, col+1, n);
-            }
-            if (result) {
-                return true;
-            }else{
-                board[k][col]=0;
-            }
+        if (Qsafe(board, k, col, n)) {
+            board[k][col]=1;
+            result = NQ(board, col+1, n);
         }
+        if (result) {
+            return true;
+        }else{
+            board[k][col]=0;
+        }
+    }
     
     return false;
 }
@@ -543,7 +543,7 @@ void Nqueen(int n){
 }
 
 bool isSubsetSum(int set[], int n, int sum){  //The value of subset[i][j] will be true if there is a subset of
-                                                //set[0..j-1] with sum equal to i., otherwise false.
+    //set[0..j-1] with sum equal to i., otherwise false.
     bool subset[sum+1][n+1];
     for (int i=0; i<=n; i++) {
         subset[0][i]=true;
@@ -610,7 +610,7 @@ int LCS(char s1[1024], char s2[1024], int m, int n, int i, int j){
         return 1+LCS(s1, s2, m, n, i+1, j+1);
     }
     else{
-return (LCS(s1, s2, m, n, i+1, j)>LCS(s1, s2, m, n, i, j+1))?LCS(s1, s2, m, n, i+1, j):LCS(s1, s2, m, n, i, j+1);
+        return (LCS(s1, s2, m, n, i+1, j)>LCS(s1, s2, m, n, i, j+1))?LCS(s1, s2, m, n, i+1, j):LCS(s1, s2, m, n, i, j+1);
     }
 }
 
@@ -672,26 +672,26 @@ int main()
 {
     int ch;
     {
-    cout << "Enter choice\n" <<
-    " 1.Generate Binary Matrix\n" <<
-    " 2.See if there is subset for given sum\n" <<
-    " 3.Show the subsets for given sum\n" <<
-    " 4.Print all subsets of a set\n" <<
-    " 5.Show all permutations of a string\n" <<
-    " 6.Generate parantheses\n" <<
-    " 7.Number of ways of climbing steps\n" <<
-    " 8.Generate number partition\n" <<
-    " 9.Find path in matrix\n" <<
-    " 10.Find all paths and cost\n" <<
-    " 11.Calculate basin size using DFS\n" <<
-    " 12.Calculate basin size using BFS\n" <<
-    " 13.Knight's tour\n" <<
-    " 14.N queen problem\n" <<
-    " 15.Subset sum using DP\n" <<      //to be understood
-    " 16.Denomination problem\n" <<
-    " 17.Towers of hanoi\n" <<
-    " 18.Longest common subsequence\n" <<
-    " 19.Box stacking\n";
+        cout << "Enter choice\n" <<
+        " 1.Generate Binary Matrix\n" <<
+        " 2.See if there is subset for given sum\n" <<
+        " 3.Show the subsets for given sum\n" <<
+        " 4.Print all subsets of a set\n" <<
+        " 5.Show all permutations of a string\n" <<
+        " 6.Generate parantheses\n" <<
+        " 7.Number of ways of climbing steps\n" <<
+        " 8.Generate number partition\n" <<
+        " 9.Find path in matrix\n" <<
+        " 10.Find all paths and cost\n" <<
+        " 11.Calculate basin size using DFS\n" <<
+        " 12.Calculate basin size using BFS\n" <<
+        " 13.Knight's tour\n" <<
+        " 14.N queen problem\n" <<
+        " 15.Subset sum using DP\n" <<
+        " 16.Denomination problem\n" <<
+        " 17.Towers of hanoi\n" <<
+        " 18.Longest common subsequence\n" <<
+        " 19.Box stacking\n";
     }
     cin >> ch;
     switch (ch) {
@@ -785,7 +785,7 @@ int main()
             break;
         case 6:
         {
-         int n;
+            int n;
             cout << "Enter the size" << endl;
             cin >> n;
             n = 2*n;
@@ -837,7 +837,7 @@ int main()
             path[0][0] = 1;
             mat[0][0] = 1;
             if(!findWay((int **)mat,(int **)path,0,0,y,x,0)){
-             cout << "\nNo way!\n";
+                cout << "\nNo way!\n";
             }else{
                 path[x-1][y-1] = 1;
                 for (int i=0; i<x; i++) {
@@ -882,10 +882,10 @@ int main()
             cout << endl << endl << "The shortest path:" << endl;
             int t;
             for (t=0; t<(x+y-1); t++) {
-                 cout << "(" << s[t][0] << "," << s[t][1] << ")" << "\t";
+                cout << "(" << s[t][0] << "," << s[t][1] << ")" << "\t";
             }
             cout << "COST: " << s[t][0] << endl;
-
+            
         }
             break;
         case 11:
@@ -991,7 +991,7 @@ int main()
             cin >> sum;
             if(isSubsetSum(arr, n, sum))
             {
-                    cout << "sum found";
+                cout << "sum found";
             }
             cout << endl;
         }
