@@ -60,7 +60,6 @@ void showSubSet(int set[], int n, int m, int bin[]){
     return;
 }
 
-
 void showSetSum(int set[], int n, int m, int sum, int bin[]){
     if((n == 0) && (sum == 0))
     {
@@ -286,6 +285,17 @@ void partitionProper(int n){
         k++;
     }
 }
+
+/* LOGIC: geeksforgeeks.org
+ We are given current partition in p[] and its size. We need to update p[] to store next partition. Values in p[] must be sorted in non-increasing order.
+ 
+ 1) Find the rightmost non-one value in p[] and store the count of 1′s encountered before a non-one value in a variable rem_val (It indicates sum of values on right side to be updated). Let the index of non-one value be k.
+ 
+ 2) Decrease the value of p[k] by 1 and increase rem_val by 1. Now there may be two cases:
+ a) If p[k] is more than or equal to rem_val. This is a simple case (we have the sorted order in new partition). Put rem_val at p[k+1] and p[0...k+1] is our new partition.
+ b) Else (This is a interesting case, take initial p[] as {3, 1, 1, 1}, p[k] is decreased from 3 to 2, rem_val is increased from 3 to 4, the next partition should be {2, 2, 2}).
+ Copy p[k] to next position, increment k and reduce count by p[k] while p[k] is less than rem_val. Finally, put rem_val at p[k+1] and p[0...k+1] is our new partition. This step is like dividing rem_val in terms of p[k] (4 is divided in 2′s).
+ */
 
 void basinSizeDFS(int **region, int *size, int x, int y, int i, int j, int val, int **visited){
     if(region[i][j]!=val || i>x || j>y || i<0 || j<0){
