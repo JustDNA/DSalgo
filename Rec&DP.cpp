@@ -682,18 +682,6 @@ int max(int a, int b){
     return (a>b)?a:b;
 }
 
-int LIS(int a[], int n1, int prev = -1000){
-    if (n1 <= 0) {
-        return 0;
-    }
-    if (*a >= prev) {
-        prev = *a;
-        return 1 + LIS(a+1,n1-1,prev);
-    }
-    prev = *a;
-    return max(LIS(a+1, n1-1, prev), LIS(a+2, n1-2, prev));
-}
-
 int LISdp(int a[], int n){
     int b[n];
     for (int i=0; i<n; i++) {
@@ -701,8 +689,8 @@ int LISdp(int a[], int n){
     }
     for (int i=0; i<n; i++) {
         for (int j=0; j<i; j++) {
-            if (a[j] < a[i] && b[i]+1 < b[j]) {
-                b[j] = 1+b[i];
+            if (a[j] < a[i] && b[j]+1 > b[i]) {
+                b[i] = 1+b[j];
             }
         }
     }
