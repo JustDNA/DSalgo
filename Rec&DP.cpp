@@ -694,6 +694,27 @@ int LIS(int a[], int n1, int prev = -1000){
     return max(LIS(a+1, n1-1, prev), LIS(a+2, n1-2, prev));
 }
 
+int LISdp(int a[], int n){
+    int b[n];
+    for (int i=0; i<n; i++) {
+        b[i] = 1;
+    }
+    for (int i=0; i<n; i++) {
+        for (int j=0; j<i; j++) {
+            if (a[j] < a[i] && b[i]+1 < b[j]) {
+                b[j] = 1+b[i];
+            }
+        }
+    }
+    int max=0;
+    for (int i=0; i<n; i++) {
+        if (b[i]>max) {
+            max = b[i];
+        }
+    }
+    return max;
+}
+
 int main()
 {
     int ch;
@@ -1068,7 +1089,7 @@ int main()
             for (int i=0; i<n1; i++) {
                 cin >> a[i];
             }
-            cout << LIS(a,n1) << endl;
+            cout << LISdp(a,n1) << endl;
         }
             break;
     }
