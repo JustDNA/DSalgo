@@ -678,6 +678,22 @@ void Hanoi(int n){
     HanoiUtil(n, 'a', 'c', 'b');
 }
 
+int max(int a, int b){
+    return (a>b)?a:b;
+}
+
+int LIS(int a[], int n1, int prev = -1000){
+    if (n1 <= 0) {
+        return 0;
+    }
+    if (*a >= prev) {
+        prev = *a;
+        return 1 + LIS(a+1,n1-1,prev);
+    }
+    prev = *a;
+    return max(LIS(a+1, n1-1, prev), LIS(a+2, n1-2, prev));
+}
+
 int main()
 {
     int ch;
@@ -701,7 +717,7 @@ int main()
         " 16.Denomination problem\n" <<
         " 17.Towers of hanoi\n" <<
         " 18.Longest common subsequence\n" <<
-        " 19.Box stacking\n";
+        " 19.Longest increasing subsequence\n";
     }
     cin >> ch;
     switch (ch) {
@@ -1040,6 +1056,19 @@ int main()
             cout << "Enter the string\t";
             cin >> s2;
             cout << LcsDP(s1, s2, m, n) << endl;
+        }
+            break;
+        case 19:
+        {
+            int n1;
+            cout << "Enter length of array\n";
+            cin >> n1;
+            int a[n1];
+            cout << "Enter array contents\n";
+            for (int i=0; i<n1; i++) {
+                cin >> a[i];
+            }
+            cout << LIS(a,n1) << endl;
         }
             break;
     }
