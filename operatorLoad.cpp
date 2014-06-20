@@ -14,8 +14,16 @@ public:
         temp.y = y+n.y;
         return temp;
     }
+    //friend node operator+(node n1, node n2);
 };
-
+/*
+node operator+(node n1,node n2){
+    node temp(0,0);
+    temp.x = n1.x+n2.x;
+    temp.y = n1.y+n2.y;
+    return temp;
+}
+*/
 int main()
 {
     node n1(3,4);
